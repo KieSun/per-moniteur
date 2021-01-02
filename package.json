@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "clean": "rm -rf ./dist",
+    "dev": "tsc -w",
     "build": "yarn clean && tsc",
     "prepare": "yarn build",
     "check-types": "tsc --noEmit",
@@ -45,5 +46,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "dependencies": {
+    "chalk": "^4.1.0"
   }
 }
