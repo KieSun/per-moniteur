@@ -1,7 +1,6 @@
 import { isDev } from './utils'
 
 export const log = (message?: string) => {
-  console.log(isDev())
   if (!isDev()) return
   console.log(
     `%cPer`,
