@@ -24,6 +24,11 @@ export const getNavigationTime = () => {
       } = timing
 
       return {
+        redirect: {
+          count: redirectCount,
+          time: redirectEnd - redirectStart,
+        },
+        appCache: domainLookupStart - fetchStart,
         // dns lookup time
         dnsTime: domainLookupEnd - domainLookupStart,
         // handshake end - handshake start time
@@ -31,13 +36,10 @@ export const getNavigationTime = () => {
         // HTTP head size
         headSize: transferSize - encodedBodySize || 0,
         responseTime: responseEnd - responseStart,
-        fetchTime: responseEnd - fetchStart,
         // Time to First Byte
         TTFB: responseStart - requestStart,
-        redirect: {
-          count: redirectCount,
-          time: redirectEnd - redirectStart,
-        },
+        // fetch resource time
+        fetchTime: responseEnd - fetchStart,
         // Service work response time
         workerTime: workerStart > 0 ? responseEnd - workerStart : 0,
         domReady: domContentLoadedEventEnd - fetchStart,
