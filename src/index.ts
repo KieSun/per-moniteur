@@ -1,6 +1,6 @@
 import { isSupportPerformance } from './utils'
 import { log } from './log'
-import { getNavigationTime, getNetworkInfo } from './indicator'
+import { getNavigationTime, getNetworkInfo, getPaintTime } from './indicator'
 
 export default class Per {
   constructor() {
@@ -10,5 +10,6 @@ export default class Per {
     }
     log(getNavigationTime())
     log(getNetworkInfo())
+    log(getPaintTime())
   }
 }

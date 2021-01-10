@@ -1,3 +1,5 @@
+import { getObserver } from './utils'
+
 export const getNavigationTime = () => {
   const navigation = window.performance.getEntriesByType('navigation')
   if (navigation.length > 0) {
@@ -66,4 +68,14 @@ export const getNetworkInfo = () => {
     }
   }
   return {}
+}
+
+export const getPaintTime = () => {
+  const data: { [key: string]: number } = ({} = {})
+  getObserver('paint', (entries) => {
+    entries.forEach((entry) => {
+      data[entry.name] = entry.startTime
+    })
+  })
+  return data
 }
