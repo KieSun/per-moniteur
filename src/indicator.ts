@@ -1,5 +1,3 @@
-import { INavigationTimeProps } from './types'
-
 export const getNavigationTime = () => {
   const navigation = window.performance.getEntriesByType('navigation')
   if (navigation.length > 0) {
@@ -49,8 +47,23 @@ export const getNavigationTime = () => {
         tti: domInteractive - fetchStart,
         // DOMContentLoaded time
         DCL: domContentLoadedEventEnd - domContentLoadedEventStart,
-      } as INavigationTimeProps
+      }
     }
   }
-  return null
+  return {}
+}
+
+export const getNetworkInfo = () => {
+  if ('connection' in window.navigator) {
+    const connection = window.navigator['connection'] || {}
+    const { effectiveType, downlink, rtt, saveData } = connection
+    return {
+      effectiveType,
+      downlink,
+      // round-trip time
+      rtt,
+      saveData,
+    }
+  }
+  return {}
 }
