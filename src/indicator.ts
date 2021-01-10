@@ -1,4 +1,5 @@
-import { getObserver } from './utils'
+import { getObserver, hiddenTime } from './utils'
+import { logIndicator } from './log'
 
 export const getNavigationTime = () => {
   const navigation = window.performance.getEntriesByType('navigation')
@@ -78,4 +79,14 @@ export const getPaintTime = () => {
     })
   })
   return data
+}
+
+export const getFID = () => {
+  getObserver('first-input', (entries) => {
+    entries.forEach((entry) => {
+      if (entry.startTime < hiddenTime) {
+        logIndicator('FID', entry.processingStart - entry.startTime)
+      }
+    })
+  })
 }

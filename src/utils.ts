@@ -20,3 +20,5 @@ export const getObserver = (type: string, cb: IPerCallback) => {
   })
   perfObserver.observe({ type, buffered: true })
 }
+
+export let hiddenTime = document.visibilityState === 'hidden' ? 0 : Infinity

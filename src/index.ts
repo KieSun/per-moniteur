@@ -1,6 +1,12 @@
 import { isSupportPerformance } from './utils'
 import { log, logIndicator } from './log'
-import { getNavigationTime, getNetworkInfo, getPaintTime } from './indicator'
+import {
+  getNavigationTime,
+  getNetworkInfo,
+  getPaintTime,
+  getFID,
+} from './indicator'
+import { hiddenTime } from './utils'
 
 export default class Per {
   constructor() {
@@ -11,5 +17,16 @@ export default class Per {
     logIndicator('Navigation Time', getNavigationTime())
     logIndicator('Network Info', getNetworkInfo())
     logIndicator('Paint Time', getPaintTime())
+    getFID()
+
+    // indicator not be measured when the page is loaded in a background tab
+    document.addEventListener(
+      'visibilitychange',
+      (event) => {
+        // @ts-ignore
+        hiddenTime = Math.min(hiddenTime, event.timeStamp)
+      },
+      { once: true }
+    )
   }
 }
