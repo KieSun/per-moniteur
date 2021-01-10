@@ -100,3 +100,15 @@ export const getLCP = () => {
     })
   })
 }
+
+export const getCLS = () => {
+  getObserver('layout-shift', (entries) => {
+    let cls = 0
+    entries.forEach((entry) => {
+      if (!entry.hadRecentInput) {
+        cls += entry.value
+      }
+    })
+    logIndicator('CLS Update', cls)
+  })
+}

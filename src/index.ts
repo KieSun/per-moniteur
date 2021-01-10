@@ -6,6 +6,7 @@ import {
   getPaintTime,
   getFID,
   getLCP,
+  getCLS,
 } from './indicator'
 import { hiddenTime } from './utils'
 
@@ -20,6 +21,7 @@ export default class Per {
     logIndicator('Paint Time', getPaintTime())
     getFID()
     getLCP()
+    getCLS()
 
     // indicator not be measured when the page is loaded in a background tab
     document.addEventListener(
