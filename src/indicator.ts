@@ -1,6 +1,8 @@
 import { getObserver, hiddenTime } from './utils'
 import { logIndicator } from './log'
 
+let tbt = 0
+
 export const getNavigationTime = () => {
   const navigation = window.performance.getEntriesByType('navigation')
   if (navigation.length > 0) {
@@ -76,6 +78,9 @@ export const getPaintTime = () => {
   getObserver('paint', (entries) => {
     entries.forEach((entry) => {
       data[entry.name] = entry.startTime
+      if (entry.name === 'first-contentful-paint') {
+        getLongTask(entry.startTime)
+      }
     })
   })
   return data
@@ -86,6 +91,9 @@ export const getFID = () => {
     entries.forEach((entry) => {
       if (entry.startTime < hiddenTime) {
         logIndicator('FID', entry.processingStart - entry.startTime)
+        // TBT is in fcp -> tti
+        // This data may be inaccurate, because fid >= tti
+        logIndicator('TBT', tbt)
       }
     })
   })
@@ -110,5 +118,19 @@ export const getCLS = () => {
       }
     })
     logIndicator('CLS Update', cls)
+  })
+}
+
+export const getLongTask = (fcp: number) => {
+  getObserver('longtask', (entries) => {
+    entries.forEach((entry) => {
+      // get long task time in fcp -> tti
+      if (entry.name !== 'self' || entry.startTime < fcp) {
+        return
+      }
+      // long tasks mean time over 50ms
+      const blockingTime = entry.duration - 50
+      if (blockingTime > 0) tbt += blockingTime
+    })
   })
 }
