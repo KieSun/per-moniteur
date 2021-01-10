@@ -5,6 +5,7 @@ import {
   getNetworkInfo,
   getPaintTime,
   getFID,
+  getLCP,
 } from './indicator'
 import { hiddenTime } from './utils'
 
@@ -18,6 +19,7 @@ export default class Per {
     logIndicator('Network Info', getNetworkInfo())
     logIndicator('Paint Time', getPaintTime())
     getFID()
+    getLCP()
 
     // indicator not be measured when the page is loaded in a background tab
     document.addEventListener(

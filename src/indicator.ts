@@ -90,3 +90,13 @@ export const getFID = () => {
     })
   })
 }
+
+export const getLCP = () => {
+  getObserver('largest-contentful-paint', (entries) => {
+    entries.forEach((entry) => {
+      if (entry.startTime < hiddenTime) {
+        logIndicator('LCP Update', entry)
+      }
+    })
+  })
+}
