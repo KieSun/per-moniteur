@@ -1,13 +1,13 @@
 export type IPerCallback = (entries: any[]) => void
 
 export interface IPerProps {
-  tracker?: (type: IPerType, data: any, allData: any) => void
+  tracker?: (type: IPerDataType, data: any, allData: any) => void
   log?: boolean
 }
 
 export type IPerData = Object | number
 
-export type IPerType =
+export type IPerDataType =
   | 'navigationTime'
   | 'networkInfo'
   | 'paintTime'

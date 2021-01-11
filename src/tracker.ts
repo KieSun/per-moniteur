@@ -1,9 +1,9 @@
 import { config } from './config'
-import { IPerData, IPerType } from './types'
+import { IPerData, IPerDataType } from './types'
 
-const allData: Partial<Record<IPerType, IPerData>> = {}
+const allData: Partial<Record<IPerDataType, IPerData>> = {}
 
-const typeMap: Record<string, IPerType> = {
+const typeMap: Record<string, IPerDataType> = {
   'Navigation Time': 'navigationTime',
   'Network Info': 'networkInfo',
   'Paint Time': 'paintTime',
