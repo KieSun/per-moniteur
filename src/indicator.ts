@@ -103,7 +103,11 @@ export const getLCP = () => {
   getObserver('largest-contentful-paint', (entries) => {
     entries.forEach((entry) => {
       if (entry.startTime < hiddenTime) {
-        logIndicator('LCP Update', entry)
+        const { startTime, renderTime, size } = entry
+        logIndicator('LCP Update', {
+          time: renderTime | startTime,
+          size,
+        })
       }
     })
   })
