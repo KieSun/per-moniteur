@@ -1,9 +1,9 @@
 import { config } from './config'
-import { IPerData } from './types'
+import { IPerData, IPerType } from './types'
 
-const allData: { [key: string]: IPerData } = {}
+const allData: Partial<Record<IPerType, IPerData>> = {}
 
-const typeMap: { [key: string]: string } = {
+const typeMap: { [key: string]: IPerType } = {
   'Navigation Time': 'navigationTime',
   'Network Info': 'networkInfo',
   'Paint Time': 'paintTime',
@@ -16,5 +16,5 @@ const typeMap: { [key: string]: string } = {
 export default (type: string, data: IPerData) => {
   const currentType = typeMap[type]
   allData[currentType] = data
-  config.tracker(currentType, data, allData)
+  config.tracker && config.tracker(currentType, data, allData)
 }
