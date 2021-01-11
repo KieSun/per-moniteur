@@ -9,9 +9,12 @@ import {
   getCLS,
 } from './indicator'
 import { hiddenTime } from './utils'
+import { IPerProps } from './types'
+import { config } from './config'
 
 export default class Per {
-  constructor() {
+  constructor(args: IPerProps) {
+    config.tracker = args.tracker
     if (!isSupportPerformance) {
       log('该浏览器不支持 Performance API')
       return
