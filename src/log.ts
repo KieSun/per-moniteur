@@ -1,9 +1,9 @@
-import { isDev } from './utils'
 import tracker from './tracker'
 import { IPerData } from './types'
+import { config } from './config'
 
 export const log = (message?: any) => {
-  if (!isDev()) return
+  if (!config.log) return
   console.log(
     `%cPer`,
     'background: #606060; color: white; padding: 1px 10px; border-radius: 3px;',
@@ -13,7 +13,7 @@ export const log = (message?: any) => {
 
 export const logIndicator = (type: string, data: IPerData) => {
   tracker(type, data)
-  if (!isDev()) return
+  if (!config.log) return
   console.log(
     `%cPer%c${type}`,
     'background: #606060; color: white; padding: 1px 10px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;',

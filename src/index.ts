@@ -15,6 +15,7 @@ import { config } from './config'
 export default class Per {
   constructor(args: IPerProps) {
     config.tracker = args.tracker
+    if (typeof args.log === 'boolean') config.log = args.log
     if (!isSupportPerformance) {
       log('该浏览器不支持 Performance API')
       return

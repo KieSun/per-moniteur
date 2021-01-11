@@ -1,7 +1,8 @@
 export type IPerCallback = (entries: any[]) => void
 
 export interface IPerProps {
-  tracker: (type: IPerType, data: any, allData: any) => void
+  tracker?: (type: IPerType, data: any, allData: any) => void
+  log?: boolean
 }
 
 export type IPerData = Object | number
