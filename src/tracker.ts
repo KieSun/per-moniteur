@@ -3,7 +3,7 @@ import { IPerData, IPerType } from './types'
 
 const allData: Partial<Record<IPerType, IPerData>> = {}
 
-const typeMap: { [key: string]: IPerType } = {
+const typeMap: Record<string, IPerType> = {
   'Navigation Time': 'navigationTime',
   'Network Info': 'networkInfo',
   'Paint Time': 'paintTime',
