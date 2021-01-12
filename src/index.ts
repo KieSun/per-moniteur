@@ -17,7 +17,7 @@ export default class Per {
     config.tracker = args.tracker
     if (typeof args.log === 'boolean') config.log = args.log
     if (!isSupportPerformance) {
-      log('该浏览器不支持 Performance API')
+      log(`This browser doesn't support Performance API`)
       return
     }
     logIndicator('Navigation Time', getNavigationTime())
