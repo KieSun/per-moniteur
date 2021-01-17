@@ -1,4 +1,4 @@
-import { getObserver, hiddenTime } from './utils'
+import { getObserver, hiddenTime, getScore } from './utils'
 import { logIndicator } from './log'
 
 let tbt = 0
@@ -71,39 +71,54 @@ export const getNetworkInfo = () => {
 }
 
 export const getPaintTime = () => {
-  const data: { [key: string]: number } = ({} = {})
-  getObserver('paint', entries => {
-    entries.forEach(entry => {
-      data[entry.name] = entry.startTime
-      if (entry.name === 'first-contentful-paint') {
-        getLongTask(entry.startTime)
+  getObserver('paint', (entries) => {
+    entries.forEach((entry) => {
+      const time = entry.startTime
+      const name = entry.name
+      if (name === 'first-contentful-paint') {
+        getLongTask(time)
+        logIndicator('FCP', {
+          time,
+          score: getScore('fcp', time),
+        })
+      } else {
+        logIndicator('FP', {
+          time,
+        })
       }
     })
   })
-  return data
 }
 
 export const getFID = () => {
-  getObserver('first-input', entries => {
-    entries.forEach(entry => {
+  getObserver('first-input', (entries) => {
+    entries.forEach((entry) => {
       if (entry.startTime < hiddenTime) {
-        logIndicator('FID', entry.processingStart - entry.startTime)
+        const time = entry.processingStart - entry.startTime
+        logIndicator('FID', {
+          time,
+          score: getScore('fid', time),
+        })
         // TBT is in fcp -> tti
         // This data may be inaccurate, because fid >= tti
-        logIndicator('TBT', tbt)
+        logIndicator('TBT', {
+          time: tbt,
+          score: getScore('tbt', tbt),
+        })
       }
     })
   })
 }
 
 export const getLCP = () => {
-  getObserver('largest-contentful-paint', entries => {
-    entries.forEach(entry => {
+  getObserver('largest-contentful-paint', (entries) => {
+    entries.forEach((entry) => {
       if (entry.startTime < hiddenTime) {
         const { startTime, renderTime, size } = entry
         logIndicator('LCP Update', {
           time: renderTime | startTime,
           size,
+          score: getScore('lcp', renderTime | startTime),
         })
       }
     })
@@ -111,20 +126,23 @@ export const getLCP = () => {
 }
 
 export const getCLS = () => {
-  getObserver('layout-shift', entries => {
-    let cls = 0
-    entries.forEach(entry => {
+  getObserver('layout-shift', (entries) => {
+    let value = 0
+    entries.forEach((entry) => {
       if (!entry.hadRecentInput) {
-        cls += entry.value
+        value += entry.value
       }
     })
-    logIndicator('CLS Update', cls)
+    logIndicator('CLS Update', {
+      value,
+      score: getScore('cls', value),
+    })
   })
 }
 
 export const getLongTask = (fcp: number) => {
-  getObserver('longtask', entries => {
-    entries.forEach(entry => {
+  getObserver('longtask', (entries) => {
+    entries.forEach((entry) => {
       // get long task time in fcp -> tti
       if (entry.name !== 'self' || entry.startTime < fcp) {
         return

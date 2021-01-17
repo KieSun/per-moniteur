@@ -22,7 +22,7 @@ export default class Per {
     }
     logIndicator('Navigation Time', getNavigationTime())
     logIndicator('Network Info', getNetworkInfo())
-    logIndicator('Paint Time', getPaintTime())
+    getPaintTime()
     getFID()
     getLCP()
     getCLS()

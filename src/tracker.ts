@@ -6,11 +6,12 @@ const allData: Partial<Record<IPerDataType, IPerData>> = {}
 const typeMap: Record<string, IPerDataType> = {
   'Navigation Time': 'navigationTime',
   'Network Info': 'networkInfo',
-  'Paint Time': 'paintTime',
+  FCP: 'fcp',
+  FP: 'fp',
   'LCP Update': 'lcp',
   'CLS Update': 'cls',
-  FID: 'fid',
   TBT: 'tbt',
+  FID: 'fid',
 }
 
 export default (type: string, data: IPerData) => {

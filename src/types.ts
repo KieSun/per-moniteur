@@ -10,7 +10,8 @@ export type IPerData = Object | number
 export type IPerDataType =
   | 'navigationTime'
   | 'networkInfo'
-  | 'paintTime'
+  | 'fcp'
+  | 'fp'
   | 'lcp'
   | 'cls'
   | 'fid'
