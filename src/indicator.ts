@@ -19,7 +19,6 @@ export const getNavigationTime = () => {
         redirectEnd,
         redirectStart,
         redirectCount,
-        domInteractive,
         responseEnd,
         responseStart,
         fetchStart,
