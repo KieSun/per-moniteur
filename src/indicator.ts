@@ -48,8 +48,6 @@ export const getNavigationTime = () => {
         // Service work response time
         workerTime: workerStart > 0 ? responseEnd - workerStart : 0,
         domReady: domContentLoadedEventEnd - fetchStart,
-        // time to interactive
-        tti: domInteractive - fetchStart,
         // DOMContentLoaded time
         DCL: domContentLoadedEventEnd - domContentLoadedEventStart,
       }
@@ -75,8 +73,8 @@ export const getNetworkInfo = () => {
 
 export const getPaintTime = () => {
   const data: { [key: string]: number } = ({} = {})
-  getObserver('paint', (entries) => {
-    entries.forEach((entry) => {
+  getObserver('paint', entries => {
+    entries.forEach(entry => {
       data[entry.name] = entry.startTime
       if (entry.name === 'first-contentful-paint') {
         getLongTask(entry.startTime)
@@ -87,8 +85,8 @@ export const getPaintTime = () => {
 }
 
 export const getFID = () => {
-  getObserver('first-input', (entries) => {
-    entries.forEach((entry) => {
+  getObserver('first-input', entries => {
+    entries.forEach(entry => {
       if (entry.startTime < hiddenTime) {
         logIndicator('FID', entry.processingStart - entry.startTime)
         // TBT is in fcp -> tti
@@ -100,8 +98,8 @@ export const getFID = () => {
 }
 
 export const getLCP = () => {
-  getObserver('largest-contentful-paint', (entries) => {
-    entries.forEach((entry) => {
+  getObserver('largest-contentful-paint', entries => {
+    entries.forEach(entry => {
       if (entry.startTime < hiddenTime) {
         const { startTime, renderTime, size } = entry
         logIndicator('LCP Update', {
@@ -114,9 +112,9 @@ export const getLCP = () => {
 }
 
 export const getCLS = () => {
-  getObserver('layout-shift', (entries) => {
+  getObserver('layout-shift', entries => {
     let cls = 0
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       if (!entry.hadRecentInput) {
         cls += entry.value
       }
@@ -126,8 +124,8 @@ export const getCLS = () => {
 }
 
 export const getLongTask = (fcp: number) => {
-  getObserver('longtask', (entries) => {
-    entries.forEach((entry) => {
+  getObserver('longtask', entries => {
+    entries.forEach(entry => {
       // get long task time in fcp -> tti
       if (entry.name !== 'self' || entry.startTime < fcp) {
         return
