@@ -12,6 +12,9 @@
     "check-types": "tsc --noEmit",
     "check-formatting": "prettier --check '**/*.{js,json,md,tsx,ts}'"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KieSun/per-moniteur.git"
