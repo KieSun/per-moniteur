@@ -1,8 +1,8 @@
 {
-  "name": "p-cop",
+  "name": "per-moniteur",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "一个方便获取各类性能指标及 Web Vitals 的库",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "clean": "rm -rf ./dist",
@@ -14,15 +14,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KieSun/p-cop.git"
+    "url": "git+https://github.com/KieSun/per-moniteur.git"
   },
   "keywords": [],
   "author": "KieSun",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/KieSun/p-cop/issues"
+    "url": "https://github.com/KieSun/per-moniteur/issues"
   },
-  "homepage": "https://github.com/KieSun/p-cop#readme",
+  "homepage": "https://github.com/KieSun/per-moniteur#readme",
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
