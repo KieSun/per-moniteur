@@ -10,6 +10,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "./dist",
-    "types": ["./src"]
+    "types": ["./src", "node"]
   }
 }

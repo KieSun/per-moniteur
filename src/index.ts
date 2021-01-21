@@ -10,11 +10,11 @@ import {
   getTTI,
 } from './indicator'
 import { hiddenTime } from './utils'
-import { IPerProps } from './types'
+import { IPerCBProps, IPerProps } from './types'
 import { config } from './config'
 
-export default class Per {
-  constructor(args: IPerProps) {
+export default class PerMoniteur implements IPerProps {
+  constructor(args: IPerCBProps) {
     config.tracker = args.tracker
     if (typeof args.log === 'boolean') config.log = args.log
     if (!isSupportPerformance) {
@@ -37,6 +37,35 @@ export default class Per {
         hiddenTime = Math.min(hiddenTime, event.timeStamp)
       },
       { once: true }
+    )
+  }
+  markStart(name: string) {
+    performance.mark(name)
+  }
+  markEnd(startName: string, endName: string) {
+    performance.mark(endName)
+    const measureName = `PerMoniteur-${startName}`
+    performance.measure(measureName, startName, endName)
+    const measures = performance.getEntriesByName(measureName)
+    measures.forEach((measure) => logIndicator(measureName, measure, true))
+  }
+  clearMarks(name?: string) {
+    performance.clearMarks(name)
+  }
+  clearMeasures(name?: string) {
+    performance.clearMeasures(`PerMoniteur-${name}`)
+  }
+  fmpStart() {
+    this.markStart('fmp-start')
+  }
+  fmpEnd() {
+    performance.mark('fmp-end')
+    performance.measure('fmp', 'fmp-start', 'fmp-end')
+    const measures = performance.getEntriesByName('fmp')
+    measures.forEach((measure) =>
+      logIndicator('fmp', {
+        time: measure.duration,
+      })
     )
   }
 }

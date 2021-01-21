@@ -30,6 +30,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@types/jest": "^26.0.19",
+    "@types/node": "^14.14.22",
     "@types/tti-polyfill": "^0.2.0",
     "eslint": "^7.15.0",
     "eslint-plugin-prettier": "^3.3.0",

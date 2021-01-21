@@ -11,8 +11,8 @@ export const log = (message?: any) => {
   )
 }
 
-export const logIndicator = (type: string, data: IPerData) => {
-  tracker(type, data)
+export const logIndicator = (type: string, data: IPerData, measure = false) => {
+  !measure && tracker(type, data)
   if (!config.log) return
   console.log(
     `%cPer%c${type}`,
