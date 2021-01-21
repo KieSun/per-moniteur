@@ -11,7 +11,7 @@ npm install per-moniteur --save
 ## 使用
 
 ```js
-import PerMoniteur from 'per-moniteur';
+import PerMoniteur from 'per-moniteur'
 
 new PerMoniteur({
   tracker: (type, data, allData) => {
@@ -32,6 +32,8 @@ new PerMoniteur({
 - TBT
 - LCP
 - CLS
+- TTI
+- FMP
 - Web Vitals Score
 
 ## License
