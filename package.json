@@ -30,6 +30,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@types/jest": "^26.0.19",
+    "@types/tti-polyfill": "^0.2.0",
     "eslint": "^7.15.0",
     "eslint-plugin-prettier": "^3.3.0",
     "husky": "^4.3.6",
@@ -51,6 +52,7 @@
     ]
   },
   "dependencies": {
-    "chalk": "^4.1.0"
+    "chalk": "^4.1.0",
+    "tti-polyfill": "^0.2.2"
   }
 }

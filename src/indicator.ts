@@ -1,5 +1,6 @@
 import { getObserver, hiddenTime, getScore } from './utils'
 import { logIndicator } from './log'
+import ttiPolyfill from 'tti-polyfill'
 
 let tbt = 0
 
@@ -141,7 +142,9 @@ export const getCLS = () => {
 }
 
 export const getLongTask = (fcp: number) => {
+  window.__tti = { e: [] }
   getObserver('longtask', (entries) => {
+    window.__tti.e = window.__tti.e.concat(entries)
     entries.forEach((entry) => {
       // get long task time in fcp -> tti
       if (entry.name !== 'self' || entry.startTime < fcp) {
@@ -150,6 +153,14 @@ export const getLongTask = (fcp: number) => {
       // long tasks mean time over 50ms
       const blockingTime = entry.duration - 50
       if (blockingTime > 0) tbt += blockingTime
+    })
+  })
+}
+
+export const getTTI = () => {
+  ttiPolyfill.getFirstConsistentlyInteractive().then((tti) => {
+    logIndicator('TTI', {
+      value: tti,
     })
   })
 }

@@ -12,6 +12,7 @@ const typeMap: Record<string, IPerDataType> = {
   'CLS Update': 'cls',
   TBT: 'tbt',
   FID: 'fid',
+  TTI: 'tti',
 }
 
 export default (type: string, data: IPerData) => {

@@ -7,6 +7,7 @@ import {
   getFID,
   getLCP,
   getCLS,
+  getTTI,
 } from './indicator'
 import { hiddenTime } from './utils'
 import { IPerProps } from './types'
@@ -26,6 +27,7 @@ export default class Per {
     getFID()
     getLCP()
     getCLS()
+    getTTI()
 
     // indicator not be measured when the page is loaded in a background tab
     document.addEventListener(

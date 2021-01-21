@@ -16,3 +16,5 @@ export type IPerDataType =
   | 'cls'
   | 'fid'
   | 'tbt'
+  | 'tti'
+  | 'fmp'
