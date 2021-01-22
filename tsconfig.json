@@ -10,6 +10,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "typeRoots": ["node_modules/@types"],
     "types": ["./src", "node"]
   }
 }
