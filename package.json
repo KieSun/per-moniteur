@@ -1,6 +1,6 @@
 {
   "name": "per-moniteur",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "一个方便获取各类性能指标及 Web Vitals 的库",
   "main": "dist/index.js",
   "scripts": {
