@@ -53,7 +53,6 @@
     ]
   },
   "dependencies": {
-    "chalk": "^4.1.0",
     "tti-polyfill": "^0.2.2"
   }
 }
